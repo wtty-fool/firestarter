@@ -1,28 +1,25 @@
 package metrics
 
 import (
-	"net/http"
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/sirupsen/logrus"
 
 	"github.com/wtty-fool/firestarter/pkg/server"
 )
 
 func NewMetricsServer(address string) *server.Server {
-	logger := logrus.WithField("server", "metrics")
+	s := server.NewServer(address, "metrics")
 
-	handler := http.NewServeMux()
-	handler.Handle("/metrics", promhttp.HandlerFor(
+	s.Router().Handle("/metrics", promhttp.HandlerFor(
 		prometheus.DefaultGatherer,
 		promhttp.HandlerOpts{
-			ErrorLog:          logger,
+			ErrorLog:          s.Logger(),
 			EnableOpenMetrics: true,
 			Timeout:           30 * time.Second,
 		},
 	))
 
-	return server.NewServer(address, handler, logger)
+	return s
 }

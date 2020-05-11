@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/wtty-fool/firestarter/pkg/metrics"
 	"github.com/wtty-fool/firestarter/pkg/server"
 )
@@ -20,11 +18,10 @@ func favicon(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewAppServer(address string) *server.Server {
-	logger := logrus.WithField("server", "app")
+	s := server.NewServer(address, "app")
 
-	handler := http.NewServeMux()
-	handler.HandleFunc("/", home)
-	handler.HandleFunc("/favicon.ico", favicon)
+	s.Router().HandleFunc("/", home)
+	s.Router().HandleFunc("/favicon.ico", favicon)
 
-	return server.NewServer(address, handler, logger)
+	return s
 }
