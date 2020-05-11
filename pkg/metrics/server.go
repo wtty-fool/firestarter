@@ -11,10 +11,6 @@ import (
 	"github.com/wtty-fool/firestarter/pkg/server"
 )
 
-func init() {
-	prometheus.MustRegister(prometheus.NewBuildInfoCollector())
-}
-
 func NewMetricsServer(address string) *server.Server {
 	logger := logrus.WithField("server", "metrics")
 
