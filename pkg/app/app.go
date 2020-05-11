@@ -15,11 +15,16 @@ func home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello")
 }
 
+func favicon(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+}
+
 func NewAppServer(address string) *server.Server {
 	logger := logrus.WithField("server", "app")
 
 	handler := http.NewServeMux()
 	handler.HandleFunc("/", home)
+	handler.HandleFunc("/favicon.ico", favicon)
 
 	return server.NewServer(address, handler, logger)
 }
