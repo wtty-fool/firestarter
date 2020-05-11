@@ -16,9 +16,13 @@ var (
 	HomeResponseTime = prometheus.NewHistogram(
 		prometheus.HistogramOpts{
 			Namespace: "firestarter",
-			Name:      "home_response_time",
-			Help:      "Time it took app to process a call to homepage",
-			Buckets:   []float64{0.001, 0.01, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0},
+			Name:      "home_response_time_sec",
+			Help:      "Time it took app to process a call to homepage (in seconds)",
+			Buckets: []float64{
+				1.0e-07, 2.5e-07, 5.0e-07, 7.5e-07, 9.0e-07,
+				1.0e-06, 2.5e-06, 5.0e-06, 7.5e-06, 9.0e-06,
+				1.0e-05, 2.5e-05, 5.0e-05, 7.5e-05, 9.0e-05,
+			},
 		},
 	)
 
