@@ -6,7 +6,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -14,10 +14,11 @@ const (
 )
 
 var (
-	logger = log.New()
+	logger = logrus.New()
 )
 
 func init() {
+	logger.SetLevel(logrus.DebugLevel)
 	prometheus.MustRegister(prometheus.NewBuildInfoCollector())
 }
 
