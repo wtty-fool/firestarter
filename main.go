@@ -8,6 +8,10 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+const (
+	httpAddress = ":9100"
+)
+
 func init() {
 	prometheus.MustRegister(prometheus.NewBuildInfoCollector())
 }
@@ -19,5 +23,6 @@ func main() {
 			EnableOpenMetrics: true,
 		},
 	))
-	log.Fatal(http.ListenAndServe(":9100", nil))
+	log.Infof("Starting to serve metrics at %s/metrics", httpAddress)
+	log.Fatal(http.ListenAndServe(httpAddress, nil))
 }
