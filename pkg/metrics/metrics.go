@@ -13,8 +13,18 @@ var (
 		},
 	)
 
+	HomeResponseTime = prometheus.NewHistogram(
+		prometheus.HistogramOpts{
+			Namespace: "firestarter",
+			Name:      "home_response_time",
+			Help:      "Time it took app to process a call to homepage",
+			Buckets:   []float64{0.001, 0.01, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0},
+		},
+	)
+
 	allMetrics = []prometheus.Collector{
 		HomeVisitsTotal,
+		HomeResponseTime,
 	}
 )
 
