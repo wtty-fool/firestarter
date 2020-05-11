@@ -1,5 +1,6 @@
 # Firestarter
 ![CircleCI build status](https://img.shields.io/circleci/build/github/wtty-fool/firestarter)
+[![docker build status](https://img.shields.io/docker/cloud/build/wttyf00l/firestarter)](https://hub.docker.com/r/wttyf00l/firestarter)
 
 A simple, containerized Prometheus metrics generator.
 
