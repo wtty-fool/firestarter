@@ -12,7 +12,7 @@ never be used outside testing/dev/staging setups.
 The easiest way to do have Firestarter as a target right from the start is to run Prometheus container with `etc-prometheus` mounted as configuration directory:
 ```
 docker run --network host wttyf00l/firestarter
-docker run --network host --volume etc-prometheus:/etc/prometheus prom/prometheus
+docker run --network host --volume (pwd)/etc-prometheus:/etc/prometheus prom/prometheus
 ```
 
 Otherwise you may have to edit configuration inside running container and make Prometheus reload it by sending HUP signal.
