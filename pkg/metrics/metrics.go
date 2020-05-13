@@ -5,6 +5,14 @@ import (
 )
 
 var (
+	StartedTime = prometheus.NewGauge(
+		prometheus.GaugeOpts{
+			Namespace: "firestarter",
+			Name:      "started_time",
+			Help:      "Timestamp at which firestarter has started serving metrics",
+		},
+	)
+
 	HomeVisitsTotal = prometheus.NewCounter(
 		prometheus.CounterOpts{
 			Namespace: "firestarter",
@@ -25,14 +33,16 @@ var (
 			},
 		},
 	)
-
-	allMetrics = []prometheus.Collector{
-		HomeVisitsTotal,
-		HomeResponseTime,
-	}
 )
 
 func init() {
 	prometheus.MustRegister(prometheus.NewBuildInfoCollector())
-	prometheus.MustRegister(allMetrics...)
+	prometheus.MustRegister(
+		StartedTime,
+
+		HomeVisitsTotal,
+		HomeResponseTime,
+	)
+
+	StartedTime.SetToCurrentTime()
 }
