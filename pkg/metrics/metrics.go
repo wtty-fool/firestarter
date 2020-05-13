@@ -8,7 +8,7 @@ var (
 	HomeVisitsTotal = prometheus.NewCounter(
 		prometheus.CounterOpts{
 			Namespace: "firestarter",
-			Name:      "home_visits_total",
+			Name:      "home_visits",
 			Help:      "Total visits to application homepage",
 		},
 	)
