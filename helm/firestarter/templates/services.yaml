@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  ports:
+  - name: "9090"
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: prometheus
+  type: ClusterIP
+---
+{{ if .Values.firestarter.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: firestarter
+  name: firestarter
+spec:
+  ports:
+  - name: "app"
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - name: "metrics"
+    port: 9100
+    protocol: TCP
+    targetPort: 9100
+  selector:
+    app: firestarter
+  type: ClusterIP
+{{ end }}
+---
+{{ if .Values.node-exporter.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: node-exporter
+  name: node-exporter
+spec:
+  ports:
+  - name: "metrics"
+    port: 9100
+    protocol: TCP
+    targetPort: 9100
+  selector:
+    app: node-exporter
+  type: ClusterIP
+{{ end }}
+

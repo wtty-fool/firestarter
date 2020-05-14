@@ -1,0 +1,5 @@
+apiVersion: v2
+name: firestarter
+home: https://github.com/wtty-fool/firestarter
+description: A custom Prometheus metrics playground.
+version: 0.1.0

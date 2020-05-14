@@ -1,0 +1,13 @@
+prometheus:
+  image: prom/prometheus
+  tag: latest
+  configmap_name: prometheus-config
+firestarter:
+  enabled: true
+  image: wttyf00l/firestarter
+  tag: latest
+node-exporter:
+  enabled: false
+  image: prom/node-exporter
+  tag: latest
+  args: []
